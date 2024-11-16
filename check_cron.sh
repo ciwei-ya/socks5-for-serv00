@@ -16,13 +16,7 @@ if [ "$(command -v pm2)" == "/home/${USER}/.npm-global/bin/pm2" ]; then
   (crontab -l | grep -F "$REBOOT_COMMAND") || (crontab -l; echo "$REBOOT_COMMAND") | crontab -
   (crontab -l | grep -F "$CRON_JOB") || (crontab -l; echo "$CRON_JOB") | crontab -
 else
-echo "未检测到pm2，开始安装"
-bash <(curl -s https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/install-pm2.sh)
-if [ "$(command -v pm2)" == "/home/${USER}/.npm-global/bin/pm2" ]; then
-  echo "已安装 pm2，并返回正确路径，启用 pm2 保活任务"
-  (crontab -l | grep -F "$REBOOT_COMMAND") || (crontab -l; echo "$REBOOT_COMMAND") | crontab -
-  (crontab -l | grep -F "$CRON_JOB") || (crontab -l; echo "$CRON_JOB") | crontab -
-  
+
   if [ -e "${WORKDIR}/start.sh" ] && [ -e "${FILE_PATH}/config.json" ]; then
     echo "添加 nezha & socks5 的 crontab 重启任务"
     (crontab -l | grep -F "@reboot pkill -kill -u $(whoami) && ${CRON_S5} && ${CRON_NEZHA}") || (crontab -l; echo "@reboot pkill -kill -u $(whoami) && ${CRON_S5} && ${CRON_NEZHA}") | crontab -
