@@ -5,8 +5,8 @@ WORKDIR="/home/${USER}/.nezha-agent"
 FILE_PATH="/home/${USER}/.s5"
 CRON_S5="nohup ${FILE_PATH}/s5 -c ${FILE_PATH}/config.json >/dev/null 2>&1 &"
 CRON_NEZHA="nohup ${WORKDIR}/start.sh >/dev/null 2>&1 &"
-CRON_ALIST="screen -S alist ${ALIST_PATH}/alist server &"
-ALIST_PATH="/home/${USER}/domains/$(find. -type d -name '*.eu.org' -print0)"
+CRON_ALIST="*/12 * * * *  cd ${ALIST_PATH} && screen ./alist server >/dev/null 2>&1 &"
+ALIST_PATH="/home/${USER}/domains/${DNS}"
 PM2_PATH="/home/${USER}/.npm-global/lib/node_modules/pm2/bin/pm2"
 CRON_JOB="*/12 * * * * $PM2_PATH resurrect >> /home/$(whoami)/pm2_resurrect.log 2>&1"
 REBOOT_COMMAND="@reboot pkill -kill -u $(whoami) && $PM2_PATH resurrect >> /home/$(whoami)/pm2_resurrect.log 2>&1"
@@ -36,4 +36,5 @@ if [ -e "${WORKDIR}/start.sh" ] && [ -e "${FILE_PATH}/config.json" ]; then
 fi
 if [ -e "${ALIST_PATH}/alist"]; then
    ceho"添加Alist重启任务"
-   (crontab -l | grep -F "@reboot /usr/bin/env TZ=Asia/Shanghai ~/domains/alist/restart.sh start >/dev/null 2>&1
+   (crontab -l | grep -F "@reboot pkill -kill -u $(whoami) && ${CRON_ALIST}" || (crontab -l; echo "@reboot pkill -kill -u $(whoami) && ${CRON_ALIST}") | crontab -
+   (crontab -l | grep -F "$CRON_ALIST") || (crontab -l; echo "$CRON_ALIST") | crontab -
