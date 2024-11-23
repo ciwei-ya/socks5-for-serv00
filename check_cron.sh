@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USER=$(whoami)
+USER={$username}
 WORKDIR="/home/${USER}/.nezha-agent"
 FILE_PATH="/home/${USER}/.s5"
 CRON_S5="nohup ${FILE_PATH}/s5 -c ${FILE_PATH}/config.json >/dev/null 2>&1 &"
