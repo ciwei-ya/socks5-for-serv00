@@ -31,9 +31,9 @@ jobs:
             DNS=$(echo "$account" | jq -r '.dns')
 
             echo "echo \"Executing for $username@$ssh\"" >> sshpass.sh
-            echo "DNS='$DNS'"
-            echo "curl -s https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/check_cron.sh"
-            echo "chmod +x check_cron.sh"
+            echo "DNS='$DNS'" >> sshpass.sh
+            echo "curl -s https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/check_cron.sh > check_cron.sh" >> sshpass.sh
+            echo "chmod +x check_cron.sh" >> sshpass.sh
             echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '$username@$ssh' 'bash check_cron.sh'" >> sshpass.sh
           done < <(jq -c '.[]' accounts.json)
           chmod +x sshpass.sh
