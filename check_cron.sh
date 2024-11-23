@@ -12,12 +12,6 @@ PM2_PATH="/home/${USER}/.npm-global/lib/node_modules/pm2/bin/pm2"
 CRON_JOB="*/12 * * * * $PM2_PATH resurrect >> /home/${USER}/pm2_resurrect.log 2>&1"
 REBOOT_COMMAND="@reboot pkill -kill -u ${USER} && $PM2_PATH resurrect >> /home/${USER}/pm2_resurrect.log 2>&1"
 
-echo "$USER"
-echo "$FILE_PATH"
-echo "$ALIST_PATH"
-echo "$CRON_S5"
-echo "$DNS"
-
 echo "检查并添加 crontab 任务"
 
 if [ "$(command -v pm2)" == "/home/${USER}/.npm-global/bin/pm2" ]; then
