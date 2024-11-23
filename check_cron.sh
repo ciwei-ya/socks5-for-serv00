@@ -38,9 +38,10 @@ if [ -e "${WORKDIR}/start.sh" ] && [ -e "${FILE_PATH}/config.json" ]; then
     echo "添加 socks5 的 crontab 重启任务"
     (crontab -l | grep -F "@reboot pkill -kill -u $(whoami) && ${CRON_S5}") || (crontab -l; echo "@reboot pkill -kill -u $(whoami) && ${CRON_S5}") | crontab -
     (crontab -l | grep -F "* * pgrep -x \"s5\" > /dev/null || ${CRON_S5}") || (crontab -l; echo "*/12 * * * * pgrep -x \"s5\" > /dev/null || ${CRON_S5}") | crontab -
+  fi
 fi
 if [ -e "${ALIST_PATH}/alist"]; then
-   ceho"添加Alist重启任务"
+   ceho "添加Alist重启任务"
    (crontab -l | grep -F "@reboot pkill -kill -u $(whoami) && ${CRON_ALIST}") || (crontab -l; echo "@reboot pkill -kill -u $(whoami) && ${CRON_ALIST}") | crontab -
    (crontab -l | grep -F "$CRON_ALIST") || (crontab -l; echo "$CRON_ALIST") | crontab -
 fi
