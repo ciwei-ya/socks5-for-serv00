@@ -15,7 +15,7 @@ REBOOT_COMMAND="@reboot pkill -kill -u ${USER} && $PM2_PATH resurrect >> /home/$
 echo "$USER"
 echo "$FILE_PATH"
 echo "$ALIST_PATH"
-echo "$CRON_ALIST"
+echo "$CRON_S5"
 echo "$DNS"
 
 echo "检查并添加 crontab 任务"
