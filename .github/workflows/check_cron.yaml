@@ -32,7 +32,7 @@ jobs:
 
             echo "echo \"Executing for $username@$ssh\"" >> sshpass.sh
             echo "DNS='$DNS'"
-            echo "curl -s https://raw.githubusercontent.com/cmliu/socks5-for-serv00/main/check_cron.sh"
+            echo "curl -s https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/check_cron.sh"
             echo "chmod +x check_cron.sh"
             echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '$username@$ssh' 'bash check_cron.sh'" >> sshpass.sh
           done < <(jq -c '.[]' accounts.json)
