@@ -34,10 +34,9 @@ jobs:
             echo "DNS='$DNS'" >> sshpass.sh
             echo "echo '$DNS'"
             echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '$username@$ssh'" >> sshpass.sh
-            echo "bash <(curl -s https://raw.githubusercontent.com/cmliu/socks5-for-serv00/main/check_cron.sh) '$username' '$DNS'"
-            #echo "wget https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/check_cron.sh -O check_cron.sh" >> sshpass.sh
-            #echo "chmod +x check_cron.sh" >> sshpass.sh
-            #echo "bash check_cron.sh '$username' '$DNS'" >> sshpass.sh
+            echo "wget https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/check_cron.sh -O check_cron.sh" >> sshpass.sh
+            echo "chmod +x check_cron.sh" >> sshpass.sh
+            echo "bash check_cron.sh '$username' '$DNS'" >> sshpass.sh
           done < <(jq -c '.[]' accounts.json)
           chmod +x sshpass.sh
 
