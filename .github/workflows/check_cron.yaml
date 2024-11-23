@@ -34,7 +34,7 @@ jobs:
             echo "DNS='$DNS'"
             echo "curl -s https://raw.githubusercontent.com/cmliu/socks5-for-serv00/main/check_cron.sh"
             echo "chmod +x check_cron.sh"
-            echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '$username@$ssh' 'bash check_cron.sh)'" >> sshpass.sh
+            echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '$username@$ssh' 'bash check_cron.sh'" >> sshpass.sh
           done < <(jq -c '.[]' accounts.json)
           chmod +x sshpass.sh
 
