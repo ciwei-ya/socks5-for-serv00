@@ -36,7 +36,7 @@ jobs:
             echo "sshpass -p '$password' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null '$username@$ssh'" >> sshpass.sh
             echo "wget https://raw.githubusercontent.com/ciwei-ya/socks5-for-serv00/refs/heads/main/check_cron.sh -O check_cron.sh" >> sshpass.sh
             echo "chmod +x check_cron.sh" >> sshpass.sh
-            echo "export DNS='$DNS' USER='$username' bash check_cron.sh" >> sshpass.sh
+            echo "./check_cron.sh '$username' '$DNS'" >> sshpass.sh
           done < <(jq -c '.[]' accounts.json)
           chmod +x sshpass.sh
 
