@@ -11,6 +11,8 @@ CRON_ALIST="cd ${ALIST_PATH} && screen ./alist server >/dev/null 2>&1 &"
 PM2_PATH="/home/${USER}/.npm-global/lib/node_modules/pm2/bin/pm2"
 CRON_JOB="*/12 * * * * $PM2_PATH resurrect >> /home/${USER}/pm2_resurrect.log 2>&1"
 REBOOT_COMMAND="@reboot pkill -kill -u ${USER} && $PM2_PATH resurrect >> /home/${USER}/pm2_resurrect.log 2>&1"
+FANS_PATH="/home/${USER}/domains/fansMedalHelper"
+CRON_FANS="cd ${FANS_PATH} && screen python main.py --auto >/dev/null 2>&1 &"
 
 echo "检查并添加 crontab 任务"
 
@@ -45,3 +47,11 @@ if [ -e "${ALIST_PATH}/alist" ]; then
 else
   echo "未安装Alist"
 fi
+
+if [ -e "${FANS_PATH}/main.py" ]; then
+   echo "添加B站粉丝牌自动签到重启任务"
+   (crontab -l | grep -F "@reboot pkill -kill -u ${USER} && ${CRON_FANS}") || (crontab -l; echo "@reboot pkill -kill -u ${USER} && ${CRON_FANS}") | crontab -
+   (crontab -l | grep -F "* * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "*/12 * * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
+else
+  echo "未安装B站粉丝牌自动签到"
+fi 
