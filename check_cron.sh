@@ -43,7 +43,7 @@ fi
 if [ -e "${ALIST_PATH}/alist" ]; then
    echo "添加Alist重启任务"
    (crontab -l | grep -F "@reboot pkill -kill -u ${USER} && ${CRON_ALIST}") || (crontab -l; echo "@reboot pkill -kill -u ${USER} && ${CRON_ALIST}") | crontab -
-   (crontab -l | grep -F "* * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") || (crontab -l; echo "*/12 * * * * pgrep -x \"alsit\" > /dev/null || ${CRON_ALIST}") | crontab -
+   (crontab -l | grep -F "* * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") || (crontab -l; echo "*/12 * * * * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") | crontab -
 else
   echo "未安装Alist"
 fi
