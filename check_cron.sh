@@ -15,7 +15,7 @@ echo "检查并添加 crontab 任务"
 
 if [ -e "${WORKDIR}/start.sh" ]; then
     echo "添加 nezha 的 crontab 重启任务"
-    (crontab -l | grep -F "@reboot pkill -u ${USER} -x "nezha-agent" && ${CRON_NEZHA}") || (crontab -l; echo "@reboot pkill -u ${USER} -x "nezha-agent" && ${CRON_NEZHA}") | crontab -
+    (crontab -l | grep -F "@reboot pkill -u ${USER} -x \"nezha-agent\" && ${CRON_NEZHA}") || (crontab -l; echo "@reboot pkill -u ${USER} -x \"nezha-agent\" && ${CRON_NEZHA}") | crontab -
     (crontab -l | grep -F "*/12 * * * * pgrep -x \"nezha-agent\" > /dev/null || ${CRON_NEZHA}") || (crontab -l; echo "*/12 * * * * pgrep -x \"nezha-agent\" > /dev/null || ${CRON_NEZHA}") | crontab -
   else
     echo "未安装nezha"
@@ -23,7 +23,7 @@ fi
 
 if [ -e "${FILE_PATH}/config.json" ]; then
     echo "添加 socks5 的 crontab 重启任务"
-    (crontab -l | grep -F "@reboot pkill -u ${USER} -x "s5" && ${CRON_S5}") || (crontab -l; echo "@reboot pkill -u ${USER} -x "s5" && ${CRON_S5}") | crontab -
+    (crontab -l | grep -F "@reboot pkill -u ${USER} -x \"s5\" && ${CRON_S5}") || (crontab -l; echo "@reboot pkill -u ${USER} -x \"s5\" && ${CRON_S5}") | crontab -
     (crontab -l | grep -F "*/12 * * * * pgrep -x \"s5\" > /dev/null || ${CRON_S5}") || (crontab -l; echo "*/12 * * * * pgrep -x \"s5\" > /dev/null || ${CRON_S5}") | crontab -
   else
     echo "未安装socks5"
@@ -31,7 +31,7 @@ fi
 
 if [ -e "${ALIST_PATH}/alist" ]; then
    echo "添加Alist重启任务"
-   (crontab -l | grep -F "@reboot pkill -u ${USER} -x "alist" && ${CRON_ALIST}") || (crontab -l; echo "@reboot pkill -u ${USER} -x "alist" && ${CRON_ALIST}") | crontab -
+   (crontab -l | grep -F "@reboot pkill -u ${USER} -x \"alist\" && ${CRON_ALIST}") || (crontab -l; echo "@reboot pkill -u ${USER} -x \"alist\" && ${CRON_ALIST}") | crontab -
    (crontab -l | grep -F "*/12 * * * * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") || (crontab -l; echo "*/12 * * * * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") | crontab -
 else
   echo "未安装Alist"
@@ -39,8 +39,8 @@ fi
 
 if [ -e "${FANS_PATH}/main.py" ]; then
    echo "添加B站粉丝牌自动签到重启任务"
-   (crontab -l | grep -F "@reboot pkill -u ${USER} -x "python3.11" && ${CRON_FANS}") || (crontab -l; echo "@reboot pkill -kill -u ${USER} && ${CRON_FANS}") | crontab -
-   (crontab -l | grep -F "* * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "*/12 * * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
+   (crontab -l | grep -F "@reboot pkill -u ${USER} -x \"python3.11\" && ${CRON_FANS}") || (crontab -l; echo "@reboot pkill -u ${USER} -x \"python3.11\" && ${CRON_FANS}") | crontab -
+   (crontab -l | grep -F "*/12 * * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "*/12 * * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
 else
   echo "未安装B站粉丝牌自动签到"
 fi 
