@@ -9,7 +9,7 @@ CRON_NEZHA="nohup ${WORKDIR}/start.sh >/dev/null 2>&1 &"
 ALIST_PATH="/home/${USER}/domains/${DNS}"
 CRON_ALIST="cd ${ALIST_PATH} && screen -dmS alist ./alist server"
 FANS_PATH="/home/${USER}/domains/fansMedalHelper"
-CRON_FANS="cd ${FANS_PATH} && screen -dmS fans python main.py --auto >/dev/null 2>&1 &"
+CRON_FANS="cd ${FANS_PATH} && rm /home/${USER}/domains/fansMedalHelper/log.txt && nohup python main.py > /home/${USER}/domains/fansMedalHelper/log.txt 2>&1 &"
 
 echo "检查并添加 crontab 任务"
 
@@ -39,8 +39,7 @@ fi
 
 if [ -e "${FANS_PATH}/main.py" ]; then
    echo "添加B站粉丝牌自动签到重启任务"
-   (crontab -l | grep -F "@reboot pkill -u ${USER} -x \"python3.11\" && ${CRON_FANS}") || (crontab -l; echo "@reboot pkill -u ${USER} -x \"python3.11\" && ${CRON_FANS}") | crontab -
-   (crontab -l | grep -F "*/12 * * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "*/12 * * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
+   (crontab -l | grep -F "0 6 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "0 6 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
 else
   echo "未安装B站粉丝牌自动签到"
 fi 
