@@ -39,7 +39,7 @@ fi
 
 if [ -e "${FANS_PATH}/main.py" ]; then
    echo "添加B站粉丝牌自动签到重启任务"
-   (crontab -l | grep -F "0 6 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "0 6 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
+   (crontab -l | grep -F "0 22 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "0 22 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
 else
   echo "未安装B站粉丝牌自动签到"
 fi 
