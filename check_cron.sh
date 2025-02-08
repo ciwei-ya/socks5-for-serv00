@@ -33,13 +33,13 @@ if [ -e "${ALIST_PATH}/alist" ]; then
    echo "添加Alist重启任务"
    (crontab -l | grep -F "@reboot pkill -u ${USER} -x \"alist\" && ${CRON_ALIST}") || (crontab -l; echo "@reboot pkill -u ${USER} -x \"alist\" && ${CRON_ALIST}") | crontab -
    (crontab -l | grep -F "*/12 * * * * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") || (crontab -l; echo "*/12 * * * * pgrep -x \"alist\" > /dev/null || ${CRON_ALIST}") | crontab -
-else
-  echo "未安装Alist"
+  else
+    echo "未安装Alist"
 fi
 
 if [ -e "${FANS_PATH}/main.py" ]; then
    echo "添加B站粉丝牌自动签到重启任务"
    (crontab -l | grep -F "0 22 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") || (crontab -l; echo "0 22 * * * pgrep -x \"python3.11\" > /dev/null || ${CRON_FANS}") | crontab -
-else
-  echo "未安装B站粉丝牌自动签到"
+  else
+    echo "未安装B站粉丝牌自动签到"
 fi 
